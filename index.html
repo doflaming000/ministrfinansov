@@ -1,0 +1,4482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAN-FIERRO NEWS — Расследование: Kir Quwwat</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;700&family=Cormorant+Garamond:wght@300;400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --bg-primary: #0a0e14;
+    --bg-secondary: #0f1419;
+    --bg-card: #111820;
+    --green: #2d6a4f;
+    --green-light: #40916c;
+    --green-glow: #52b788;
+    --gold: #d4af37;
+    --gold-light: #f0d060;
+    --accent: #dc2626;
+    --accent-glow: #ef4444;
+    --text-primary: #f0f0f0;
+    --text-secondary: #a0aec0;
+    --text-muted: #64748b;
+    --border: rgba(82,183,136,0.15);
+    --border-strong: rgba(82,183,136,0.3);
+    --glass-border: rgba(255,255,255,0.06);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    padding-top: 80px;
+    line-height: 1.6;
+}
+
+.bg-grid {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        linear-gradient(rgba(82,183,136,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(82,183,136,0.02) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.nav-fixed {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(10,14,20,0.95);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.nav-logo-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--green-glow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background: rgba(45,106,79,0.15);
+}
+
+.nav-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 2px;
+}
+
+.nav-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-glow);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.nav-status-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent-glow);
+    border-radius: 50%;
+    animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(239,68,68,0); }
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1.5px;
+    background: var(--green-glow);
+    transition: all 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--green-glow);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 70%;
+    left: 15%;
+}
+
+.news-ticker-wrap {
+    background: linear-gradient(90deg, #1a0a0a 0%, #0f0505 100%);
+    border-bottom: 1px solid rgba(220,38,38,0.2);
+    overflow: hidden;
+    height: 34px;
+    position: relative;
+    z-index: 1;
+}
+
+.news-ticker-label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--accent);
+    color: #fff;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    z-index: 2;
+}
+
+.news-ticker-label::after {
+    content: '';
+    position: absolute;
+    right: -12px;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 12px solid var(--accent);
+}
+
+.news-ticker {
+    display: flex;
+    animation: newsTicker 55s linear infinite;
+    white-space: nowrap;
+    align-items: center;
+    height: 100%;
+    padding-left: 160px;
+}
+
+.news-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 28px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+}
+
+.news-ticker-item .time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--green-glow);
+    font-weight: 600;
+}
+
+.news-ticker-item .sep {
+    color: rgba(255,255,255,0.15);
+}
+
+@keyframes newsTicker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.main-header {
+    background: linear-gradient(180deg, rgba(45,106,79,0.04) 0%, transparent 100%);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 50px 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.header-top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--glass-border);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.header-info-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.header-info-item strong {
+    color: var(--green-glow);
+    font-weight: 600;
+}
+
+.header-main {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.header-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent-glow);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 68px;
+    font-weight: 900;
+    color: var(--text-primary);
+    line-height: 1.05;
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+}
+
+.header-title .accent {
+    background: linear-gradient(135deg, var(--green-glow) 0%, var(--green-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--text-secondary);
+    font-style: italic;
+    max-width: 850px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.header-meta-item {
+    text-align: center;
+}
+
+.header-meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.header-meta-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--green-glow);
+    font-weight: 700;
+}
+
+.main-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 50px 0;
+}
+
+.hero-stat {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-stat::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green-glow), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.hero-stat:hover {
+    transform: translateY(-4px);
+    border-color: var(--border);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.hero-stat:hover::before {
+    opacity: 1;
+}
+
+.hero-stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--green-glow);
+    display: block;
+    margin-bottom: 6px;
+}
+
+.hero-stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.section {
+    padding: 70px 0;
+    position: relative;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 45px;
+}
+
+.section-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--green-glow);
+    letter-spacing: 2px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(45,106,79,0.08);
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ===== DIALOGUE WITH PHOTOS BELOW ===== */
+.dialogue-block {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 45px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dialogue-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--green-glow));
+}
+
+.dialogue-header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.dialogue-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.dialogue-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.dialogue-meta {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.dialogue-meta-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.dialogue-meta-item strong {
+    color: var(--gold);
+}
+
+.dialogue-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto 40px;
+}
+
+.dialogue-message {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s;
+}
+
+.dialogue-message:hover {
+    background: rgba(82,183,136,0.03);
+    border-color: var(--border);
+    transform: translateY(-2px);
+}
+
+.dialogue-message.right {
+    flex-direction: row-reverse;
+}
+
+.dialogue-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    flex-shrink: 0;
+    border: 2px solid;
+}
+
+.dialogue-avatar.purosangue {
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    border-color: var(--green-glow);
+    color: #fff;
+}
+
+.dialogue-avatar.jonny {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    border-color: var(--gold);
+    color: #0a0e14;
+}
+
+.dialogue-content {
+    flex: 1;
+}
+
+.dialogue-message.right .dialogue-content {
+    text-align: right;
+}
+
+.dialogue-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.dialogue-name.purosangue { color: var(--green-glow); }
+.dialogue-name.jonny { color: var(--gold); }
+
+.dialogue-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+.dialogue-text em {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: 13px;
+}
+
+.dialogue-text strong {
+    color: var(--green-glow);
+}
+
+.dialogue-text .red {
+    color: var(--accent-glow);
+}
+
+.dialogue-text .gold {
+    color: var(--gold);
+}
+
+/* ===== PHOTO GALLERY BELOW DIALOGUE ===== */
+.dialogue-gallery {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.dialogue-gallery-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.dialogue-gallery-header h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.dialogue-gallery-header p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.dialogue-photos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.dialogue-photo-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.dialogue-photo-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--border);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.dialogue-photo-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s;
+}
+
+.dialogue-photo-card:hover img {
+    transform: scale(1.05);
+}
+
+.dialogue-photo-info {
+    padding: 16px;
+}
+
+.dialogue-photo-speaker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.dialogue-photo-speaker.purosangue {
+    color: var(--green-glow);
+}
+
+.dialogue-photo-speaker.jonny {
+    color: var(--gold);
+}
+
+.dialogue-photo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+/* ===== DOSSIER ===== */
+.dossier {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 45px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dossier::before {
+    content: 'CLASSIFIED';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 90px;
+    font-weight: 700;
+    color: rgba(220,38,38,0.025);
+    letter-spacing: 15px;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.dossier-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 45px;
+    position: relative;
+    z-index: 1;
+}
+
+.dossier-photo {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.dossier-photo img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.6s;
+}
+
+.dossier-photo:hover img {
+    transform: scale(1.04);
+}
+
+.dossier-photo-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.7) 100%);
+    pointer-events: none;
+}
+
+.dossier-stamp {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    border: 1.5px solid var(--accent);
+    color: var(--accent-glow);
+    padding: 5px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    transform: rotate(-4deg);
+    background: rgba(10,14,20,0.85);
+    font-weight: 700;
+}
+
+.dossier-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.dossier-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green-glow);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    display: block;
+    font-weight: 600;
+}
+
+.dossier-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dossier-table tr {
+    border-bottom: 1px solid var(--glass-border);
+    transition: all 0.3s;
+}
+
+.dossier-table tr:hover {
+    background: rgba(82,183,136,0.02);
+}
+
+.dossier-table td {
+    padding: 14px 0;
+    font-size: 14px;
+}
+
+.dossier-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    width: 170px;
+    font-weight: 600;
+}
+
+.dossier-table td:last-child {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.status-badge.red {
+    background: rgba(220,38,38,0.12);
+    color: var(--accent-glow);
+    border: 1px solid rgba(220,38,38,0.3);
+}
+
+.status-badge.green {
+    background: rgba(82,183,136,0.1);
+    color: var(--green-glow);
+    border: 1px solid rgba(82,183,136,0.3);
+}
+
+/* ===== STORY BLOCK ===== */
+.story-block {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.story-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green-glow), var(--green-light));
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    align-items: start;
+}
+
+.story-grid.reverse {
+    direction: rtl;
+}
+
+.story-grid.reverse > * {
+    direction: ltr;
+}
+
+.story-visuals-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.story-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.story-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green-glow);
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+    display: block;
+    font-weight: 600;
+}
+
+.story-content p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.story-content p strong {
+    color: var(--green-glow);
+}
+
+.story-content p .red {
+    color: var(--accent-glow);
+}
+
+.story-content p .gold {
+    color: var(--gold);
+}
+
+.story-visual {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.story-visual img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s;
+}
+
+.story-visual:hover img {
+    transform: scale(1.04);
+}
+
+.story-visual-label {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(10,14,20,0.9);
+    border: 1px solid var(--green-glow);
+    color: var(--green-glow);
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.story-quote {
+    background: rgba(82,183,136,0.05);
+    border-left: 3px solid var(--green-glow);
+    padding: 18px 22px;
+    margin: 20px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.story-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--text-primary);
+    font-style: italic;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.story-quote .quote-author {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--green-glow);
+    font-style: normal;
+    margin-top: 8px;
+    display: block;
+    letter-spacing: 1px;
+}
+
+/* ===== OFFICIAL DOCUMENT ===== */
+.official-document {
+    background: linear-gradient(135deg, rgba(245,240,232,0.05) 0%, rgba(245,240,232,0.02) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 30px;
+    margin: 25px 0;
+    position: relative;
+    box-shadow: 0 0 30px rgba(212,175,55,0.1);
+}
+
+.official-document::before {
+    content: '';
+    position: absolute;
+    top: 8px; left: 8px; right: 8px; bottom: 8px;
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.doc-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+}
+
+.doc-seal {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.doc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.doc-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+}
+
+.doc-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.doc-body strong {
+    color: var(--gold);
+    font-style: normal;
+}
+
+.doc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 15px;
+    border-top: 1px solid rgba(212,175,55,0.3);
+}
+
+.doc-signature {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold);
+    font-style: italic;
+}
+
+.doc-signature-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.doc-stamp {
+    border: 2px solid var(--accent-glow);
+    color: var(--accent-glow);
+    padding: 6px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    transform: rotate(-8deg);
+    font-weight: 700;
+}
+
+/* ===== INFORMANT ===== */
+.informant-block {
+    background: linear-gradient(135deg, rgba(82,183,136,0.06) 0%, var(--bg-card) 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: 16px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.informant-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green-glow), var(--green-light));
+    z-index: 2;
+}
+
+.informant-info {
+    padding: 50px;
+}
+
+.informant-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.informant-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green-glow);
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+    display: block;
+    font-weight: 600;
+}
+
+.informant-info p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.informant-quote {
+    background: rgba(82,183,136,0.05);
+    border-left: 3px solid var(--green-glow);
+    padding: 20px 25px;
+    margin: 25px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.informant-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-primary);
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.informant-quote .quote-author {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--green-glow);
+    font-style: normal;
+    margin-top: 10px;
+    display: block;
+    letter-spacing: 1px;
+}
+
+.informant-photo {
+    position: relative;
+    border-radius: 0 16px 16px 0;
+    overflow: hidden;
+    height: 100%;
+    min-height: 500px;
+}
+
+.informant-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s;
+}
+
+.informant-photo:hover img {
+    transform: scale(1.03);
+}
+
+.informant-photo-label {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(10,14,20,0.9);
+    border: 1px solid var(--green-glow);
+    color: var(--green-glow);
+    padding: 6px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+/* ===== VG BLOCK ===== */
+.vg-block {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(82,183,136,0.04) 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: 16px;
+    padding: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.vg-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--green-glow), var(--gold));
+}
+
+.vg-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.vg-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 18px;
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 100px;
+    margin-bottom: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.vg-label-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+.vg-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.vg-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.vg-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 35px;
+    position: relative;
+    z-index: 1;
+}
+
+.vg-photo {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    transition: all 0.4s;
+}
+
+.vg-photo:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+}
+
+.vg-photo img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s;
+}
+
+.vg-photo:hover img {
+    transform: scale(1.04);
+}
+
+.vg-photo-caption {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(10,14,20,0.9);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 5px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+.vg-text {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.vg-text p {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.vg-text p strong {
+    color: var(--gold);
+}
+
+.vg-text p .green {
+    color: var(--green-glow);
+}
+
+/* ===== BANK VISIT ===== */
+.bank-visit-block {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, var(--bg-card) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 16px;
+    padding: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bank-visit-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+
+.bank-visit-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.bank-visit-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.bank-visit-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+    display: block;
+    font-weight: 600;
+}
+
+.bank-visit-info p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+}
+
+.bank-visit-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.bank-visit-detail {
+    background: rgba(212,175,55,0.05);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 10px;
+    padding: 18px;
+    transition: all 0.3s;
+}
+
+.bank-visit-detail:hover {
+    border-color: rgba(212,175,55,0.3);
+    background: rgba(212,175,55,0.08);
+}
+
+.bank-visit-detail-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.bank-visit-detail-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--gold);
+    font-weight: 700;
+}
+
+.bank-visit-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.bank-visit-photo-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bank-visit-photo {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(212,175,55,0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.bank-visit-photo img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s;
+}
+
+.bank-visit-photo:hover img {
+    transform: scale(1.03);
+}
+
+.bank-visit-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-primary);
+    font-style: italic;
+    padding: 10px 5px;
+    border-left: 3px solid var(--gold);
+    padding-left: 15px;
+    background: rgba(212,175,55,0.03);
+    border-radius: 0 8px 8px 0;
+}
+
+.bank-visit-caption .speaker {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    font-style: normal;
+    letter-spacing: 1.5px;
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+/* ===== BMW ===== */
+.bmw-section {
+    background: linear-gradient(135deg, rgba(220,38,38,0.04) 0%, var(--bg-secondary) 100%);
+    border: 1px solid rgba(220,38,38,0.2);
+    border-radius: 16px;
+    padding: 45px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bmw-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+    animation: alertScan 3s linear infinite;
+}
+
+@keyframes alertScan {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.bmw-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.bmw-alert-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    border: 1px solid rgba(220,38,38,0.3);
+    background: rgba(220,38,38,0.08);
+    border-radius: 100px;
+    margin-bottom: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-glow);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.bmw-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.bmw-header h2 span {
+    color: var(--accent-glow);
+}
+
+.bmw-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.bmw-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 28px;
+}
+
+.bmw-photo {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    transition: all 0.4s;
+}
+
+.bmw-photo:hover {
+    transform: translateY(-4px);
+    border-color: rgba(220,38,38,0.3);
+}
+
+.bmw-photo img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s;
+}
+
+.bmw-photo:hover img {
+    transform: scale(1.04);
+}
+
+.bmw-photo-caption {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(10,14,20,0.9);
+    border: 1px solid rgba(220,38,38,0.4);
+    color: var(--accent-glow);
+    padding: 5px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    border-radius: 5px;
+    font-weight: 700;
+}
+
+.bmw-text {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+.bmw-text strong {
+    color: var(--accent-glow);
+}
+
+/* ===== BANK CARD ===== */
+.bank-section {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 35px;
+    align-items: center;
+}
+
+.bank-card-3d {
+    perspective: 1500px;
+}
+
+.bank-card-inner {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1.586;
+    background: linear-gradient(135deg, #2d6a4f 0%, #1e4a35 40%, #0f2d1f 100%);
+    border-radius: 18px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 25px 50px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(82,183,136,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bank-card-inner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(82,183,136,0.25) 0%, transparent 70%);
+    animation: cardShine 4s ease-in-out infinite;
+}
+
+@keyframes cardShine {
+    0%, 100% { opacity: 0.4; transform: translate(0, 0); }
+    50% { opacity: 0.8; transform: translate(-15px, 15px); }
+}
+
+.bank-card-inner::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    animation: cardGlare 5s ease-in-out infinite;
+}
+
+@keyframes cardGlare {
+    0%, 100% { left: -100%; }
+    50% { left: 150%; }
+}
+
+.card-top {
+    position: relative;
+    z-index: 1;
+}
+
+.card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.card-bank-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.card-bank-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: var(--green-glow);
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.card-chip {
+    width: 42px;
+    height: 32px;
+    background: linear-gradient(135deg, #d4af37 0%, #f0d060 50%, #b8941f 100%);
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.card-chip::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 26px;
+    height: 18px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 2px;
+}
+
+.card-middle {
+    position: relative;
+    z-index: 1;
+}
+
+.card-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 19px;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 2.5px;
+    margin-bottom: 14px;
+}
+
+.card-balance-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.card-balance-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.card-balance-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: #7fffaa;
+    letter-spacing: 1px;
+    text-shadow: 0 0 15px rgba(127,255,170,0.4);
+    animation: balanceGlow 3s ease-in-out infinite;
+}
+
+@keyframes balanceGlow {
+    0%, 100% { text-shadow: 0 0 15px rgba(127,255,170,0.4); }
+    50% { text-shadow: 0 0 25px rgba(127,255,170,0.6); }
+}
+
+.card-bottom {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.card-bottom-left {
+    display: flex;
+    gap: 25px;
+    align-items: flex-end;
+}
+
+.card-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.card-field-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 7px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.card-field-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.card-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    font-style: italic;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 1px;
+}
+
+.bank-info {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bank-info::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green-glow), var(--green-light));
+}
+
+.bank-info-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--text-primary);
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.bank-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.3s;
+}
+
+.bank-info-row:hover {
+    padding-left: 8px;
+    background: rgba(82,183,136,0.02);
+}
+
+.bank-info-row:last-child {
+    border-bottom: none;
+}
+
+.bank-info-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.bank-info-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ===== ACCUSATIONS ===== */
+.accusations {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 45px;
+    position: relative;
+    overflow: hidden;
+}
+
+.accusations-header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.accusations-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.accusations-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.accusation-item {
+    display: flex;
+    gap: 18px;
+    padding: 22px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: rgba(255,255,255,0.015);
+    border: 1px solid transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.accusation-item:hover {
+    background: rgba(82,183,136,0.03);
+    border-color: var(--border);
+    transform: translateX(4px);
+}
+
+.accusation-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--accent-glow);
+    min-width: 35px;
+    line-height: 1;
+}
+
+.accusation-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    color: var(--text-primary);
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.accusation-text strong {
+    color: var(--green-glow);
+}
+
+.accusation-cta {
+    text-align: center;
+    margin-top: 35px;
+    padding-top: 25px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.accusation-cta p {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 14px 36px;
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 700;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(45,106,79,0.4);
+}
+
+/* ===== STATEMENT ===== */
+.statement-section {
+    position: relative;
+    padding: 80px 0;
+}
+
+.statement-block {
+    background: linear-gradient(135deg, rgba(45,106,79,0.08) 0%, rgba(17,24,32,0.95) 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.statement-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green-glow), var(--gold), var(--green-glow));
+}
+
+.statement-block::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(82,183,136,0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.statement-quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 180px;
+    font-weight: 900;
+    color: rgba(82,183,136,0.12);
+    line-height: 0.8;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.statement-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 18px;
+    background: rgba(82,183,136,0.1);
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    margin-bottom: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--green-glow);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.statement-label-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--green-glow);
+    border-radius: 50%;
+    animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+.statement-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.statement-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-weight: 500;
+    margin-bottom: 35px;
+    font-style: italic;
+    text-align: left;
+}
+
+.statement-text .highlight {
+    color: var(--green-glow);
+    font-weight: 700;
+    font-style: normal;
+    background: rgba(82,183,136,0.08);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.statement-text .highlight-red {
+    color: var(--accent-glow);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.statement-text .nowrap {
+    white-space: nowrap;
+}
+
+.statement-text .red-bg {
+    background: rgba(220,38,38,0.2);
+    color: var(--accent-glow);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-style: normal;
+    border: 1px solid rgba(220,38,38,0.4);
+}
+
+.statement-author {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+}
+
+.statement-author-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    flex-shrink: 0;
+    border: 2px solid var(--border-strong);
+}
+
+.statement-author-info {
+    flex: 1;
+}
+
+.statement-author-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.statement-author-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--green-glow);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.statement-author-org {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+.statement-author-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: right;
+    letter-spacing: 1px;
+}
+
+.statement-author-date strong {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+
+/* ===== THANKS ===== */
+.thanks-block {
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(45,106,79,0.04) 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.thanks-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--green-glow), var(--gold));
+}
+
+.thanks-quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 180px;
+    font-weight: 900;
+    color: rgba(212,175,55,0.1);
+    line-height: 0.8;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.thanks-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 18px;
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 100px;
+    margin-bottom: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.thanks-label-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+.thanks-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+}
+
+.thanks-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.thanks-text .highlight {
+    color: var(--gold);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.thanks-text .highlight-green {
+    color: var(--green-glow);
+    font-weight: 700;
+    font-style: normal;
+}
+
+.thanks-names {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 30px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.thanks-name-chip {
+    background: rgba(212,175,55,0.08);
+    border: 1px solid rgba(212,175,55,0.25);
+    color: var(--gold);
+    padding: 10px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.thanks-name-chip:hover {
+    background: rgba(212,175,55,0.15);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+}
+
+.thanks-author {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+}
+
+.thanks-author-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #0a0e14;
+    flex-shrink: 0;
+    border: 2px solid rgba(212,175,55,0.4);
+}
+
+.thanks-author-info {
+    flex: 1;
+}
+
+.thanks-author-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.thanks-author-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.thanks-author-org {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+/* ===== REPORT ===== */
+.report-block {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.report-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green-glow), var(--gold), var(--green-glow));
+}
+
+.report-header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--glass-border);
+    position: relative;
+    z-index: 1;
+}
+
+.report-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    background: rgba(82,183,136,0.1);
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    margin-bottom: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green-glow);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.report-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.report-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.report-meta {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.report-meta-item {
+    text-align: center;
+}
+
+.report-meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.report-meta-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--green-glow);
+    font-weight: 700;
+}
+
+.report-findings {
+    display: grid;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 35px;
+}
+
+.report-finding {
+    display: flex;
+    gap: 15px;
+    padding: 18px;
+    background: rgba(255,255,255,0.015);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.report-finding:hover {
+    background: rgba(82,183,136,0.03);
+    border-color: var(--border);
+    transform: translateX(4px);
+}
+
+.report-finding-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.report-finding-icon.red {
+    background: rgba(220,38,38,0.12);
+    border: 1px solid rgba(220,38,38,0.3);
+}
+
+.report-finding-icon.green {
+    background: rgba(82,183,136,0.1);
+    border: 1px solid rgba(82,183,136,0.3);
+}
+
+.report-finding-icon.gold {
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.3);
+}
+
+.report-finding-text {
+    flex: 1;
+}
+
+.report-finding-text h5 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.report-finding-text p {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.report-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.report-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.report-footer-sign {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: #0a0e14;
+    border: 2px solid rgba(212,175,55,0.4);
+}
+
+.report-footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.report-footer-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.report-footer-right {
+    text-align: right;
+}
+
+.report-footer-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.report-footer-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+}
+
+/* ===== SUMMARY TABLE ===== */
+.summary-table-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.summary-table thead th {
+    background: rgba(45,106,79,0.08);
+    padding: 16px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--green-glow);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.summary-table thead th:last-child {
+    text-align: right;
+}
+
+.summary-table tbody td {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: 14px;
+    color: var(--text-primary);
+    transition: all 0.3s;
+}
+
+.summary-table tbody tr {
+    transition: all 0.3s;
+}
+
+.summary-table tbody tr:hover td {
+    background: rgba(82,183,136,0.02);
+}
+
+.summary-table tbody td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--green-glow);
+}
+
+.summary-table tbody td:nth-child(3) {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.summary-table tbody td:last-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--green-glow);
+    text-align: right;
+}
+
+.summary-table tbody tr.bmw-row td {
+    background: rgba(220,38,38,0.04);
+}
+
+.summary-table tbody tr.bmw-row td:first-child {
+    color: var(--accent-glow);
+}
+
+.summary-table tbody tr.bmw-row td:last-child {
+    color: var(--accent-glow);
+}
+
+.bmw-illegal-tag {
+    display: inline-block;
+    background: rgba(220,38,38,0.15);
+    border: 1px solid var(--accent);
+    color: var(--accent-glow);
+    padding: 3px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-left: 10px;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.summary-table tfoot td {
+    padding: 22px 18px;
+    background: rgba(45,106,79,0.05);
+    border-top: 1.5px solid var(--green-glow);
+}
+
+.summary-table tfoot td:first-child {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.summary-table tfoot td:last-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--green-glow);
+    text-align: right;
+}
+
+.disclaimer {
+    background: rgba(212,175,55,0.05);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 12px;
+    padding: 25px 30px;
+    margin-top: 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.disclaimer-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.disclaimer-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.disclaimer-text strong {
+    color: var(--gold);
+}
+
+.final-status-block {
+    background: linear-gradient(135deg, rgba(45,106,79,0.08) 0%, rgba(212,175,55,0.04) 100%);
+    border: 2px solid var(--border-strong);
+    border-radius: 20px;
+    padding: 50px;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.final-status-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green-glow), var(--gold), var(--green-glow));
+    animation: statusGlow 3s ease-in-out infinite;
+}
+
+@keyframes statusGlow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.final-status-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.final-status-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    background: rgba(82,183,136,0.1);
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    margin-bottom: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green-glow);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.final-status-label-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--green-glow);
+    border-radius: 50%;
+    animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+.final-status-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.final-status-header p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.final-status-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.final-status-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.final-status-card:hover {
+    border-color: var(--border);
+    transform: translateY(-3px);
+}
+
+.final-status-card-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.final-status-card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.final-status-card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.final-status-card-value.green {
+    color: var(--green-glow);
+}
+
+.final-status-card-value.gold {
+    color: var(--gold);
+}
+
+.final-status-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 25px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.final-status-text strong {
+    color: var(--green-glow);
+}
+
+.final-status-text .gold {
+    color: var(--gold);
+}
+
+.footer {
+    border-top: 1px solid var(--glass-border);
+    padding: 35px 40px;
+    text-align: center;
+    margin-top: 50px;
+    background: var(--bg-secondary);
+}
+
+.footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--green-glow);
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.footer-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    line-height: 1.8;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 45px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.modal-close:hover {
+    border-color: var(--accent);
+    color: var(--accent-glow);
+}
+
+.modal-icon {
+    font-size: 56px;
+    margin-bottom: 18px;
+}
+
+.modal h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.modal p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+
+.modal-btn {
+    padding: 11px 28px;
+    background: var(--green-glow);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-btn:hover {
+    background: var(--green-light);
+    transform: translateY(-2px);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 1024px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .dossier-grid { grid-template-columns: 1fr; }
+    .bank-section { grid-template-columns: 1fr; }
+    .story-grid, .story-grid.reverse { grid-template-columns: 1fr; direction: ltr; }
+    .bank-visit-content { grid-template-columns: 1fr; }
+    .bmw-photos { grid-template-columns: 1fr; }
+    .informant-block { grid-template-columns: 1fr; }
+    .informant-photo { min-height: 350px; border-radius: 0 0 16px 16px; }
+    .informant-info { padding: 30px; }
+    .vg-gallery { grid-template-columns: 1fr; }
+    .final-status-grid { grid-template-columns: 1fr; }
+    .dialogue-photos-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-menu { flex-wrap: wrap; }
+    .section { padding: 50px 0; }
+    .section-title { font-size: 28px; }
+    .header-title { font-size: 44px; }
+    .statement-block, .thanks-block, .report-block, .dialogue-block, .story-block, .final-status-block { padding: 30px; }
+    .statement-text { font-size: 20px; }
+    .statement-author { flex-direction: column; text-align: center; }
+    .statement-author-date { text-align: center; }
+    .report-header h2 { font-size: 28px; }
+    .official-document { padding: 20px; }
+    .dialogue-message, .dialogue-message.right { flex-direction: column; }
+    .dialogue-message.right .dialogue-avatar { margin-left: 0; margin-right: 0; }
+    .dialogue-message.right .dialogue-content { text-align: left; }
+}
+
+@media (max-width: 640px) {
+    .hero-stats { grid-template-columns: 1fr; }
+    .nav-top { padding: 10px 0; }
+    .nav-link { padding: 10px 10px; font-size: 9px; }
+    .header-title { font-size: 32px; }
+    .main-content { padding: 0 20px; }
+    .main-header { padding: 40px 20px; }
+    .bank-visit-details { grid-template-columns: 1fr; }
+    .report-meta { gap: 20px; }
+    .report-footer { flex-direction: column; text-align: center; }
+    .report-footer-right { text-align: center; }
+    .header-top-info { flex-direction: column; align-items: flex-start; }
+    .header-meta { flex-direction: column; gap: 15px; }
+    .story-content p, .vg-text p, .bmw-text { text-align: left; }
+    .statement-text { text-align: left; font-size: 18px; }
+    .thanks-text { font-size: 20px; }
+    .thanks-names { justify-content: center; }
+    .thanks-author { flex-direction: column; text-align: center; }
+    .final-status-text { text-align: left; }
+    .disclaimer { flex-direction: column; text-align: left; }
+    .dialogue-photos-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<nav class="nav-fixed">
+    <div class="nav-container">
+        <div class="nav-top">
+            <div class="nav-logo">
+                <div class="nav-logo-icon"></div>
+                <div>
+                    <div class="nav-logo-text">SAN-FIERRO NEWS</div>
+                </div>
+            </div>
+            <div class="nav-status">
+                <div class="nav-status-dot"></div>
+                <span>ЗАВЕРШЕНО</span>
+            </div>
+        </div>
+        <div class="nav-menu">
+            <a href="#dialogue-start" class="nav-link">Начало</a>
+            <a href="#dossier" class="nav-link">Досье</a>
+            <a href="#realtor" class="nav-link">Зацепка №1</a>
+            <a href="#carlot" class="nav-link">Зацепка №2</a>
+            <a href="#shop" class="nav-link">Зацепка №3</a>
+            <a href="#transport" class="nav-link">Зацепка №4</a>
+            <a href="#informant" class="nav-link">Юрист</a>
+            <a href="#vice-gov" class="nav-link">Вице-губ.</a>
+            <a href="#bank-visit" class="nav-link">Банк</a>
+            <a href="#bank" class="nav-link">Счёт</a>
+            <a href="#bmw" class="nav-link">BMW</a>
+            <a href="#accusations" class="nav-link">Обвинения</a>
+            <a href="#statement" class="nav-link">Заявление</a>
+            <a href="#thanks" class="nav-link">Благодарность</a>
+            <a href="#report" class="nav-link">Отчёт</a>
+            <a href="#summary" class="nav-link">Итоги</a>
+        </div>
+    </div>
+</nav>
+
+<div class="news-ticker-wrap">
+    <div class="news-ticker-label">СРОЧНО</div>
+    <div class="news-ticker">
+        <div class="news-ticker-item"><span class="time">09:14</span> В штате San-Andreas объявлен режим повышенной готовности после утечки данных о коррупции <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">08:42</span> Прокуратура Los-Santos начала проверку финансовых операций высокопоставленных чиновников <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">07:55</span> Бывший сотрудник авторынка передал редакции San-Fierro News скриншоты объявлений министра <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">07:20</span> В Las-Venturas зафиксирована подозрительная торговая деятельность на рынке <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">06:48</span> BMW без номеров замечен в районе Rodeo Drive — владелец устанавливается <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">06:15</span> Вице-губернатор Nikos Quarless прокомментировал ситуацию: «Мы серьёзно относимся к каждому сигналу» <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">09:14</span> В штате San-Andreas объявлен режим повышенной готовности после утечки данных о коррупции <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">08:42</span> Прокуратура Los-Santos начала проверку финансовых операций высокопоставленных чиновников <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">07:55</span> Бывший сотрудник авторынка передал редакции San-Fierro News скриншоты объявлений министра <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">07:20</span> В Las-Venturas зафиксирована подозрительная торговая деятельность на рынке <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">06:48</span> BMW без номеров замечен в районе Rodeo Drive — владелец устанавливается <span class="sep">|</span></div>
+        <div class="news-ticker-item"><span class="time">06:15</span> Вице-губернатор Nikos Quarless прокомментировал ситуацию: «Мы серьёзно относимся к каждому сигналу» <span class="sep">|</span></div>
+    </div>
+</div>
+
+<header class="main-header">
+    <div class="header-container">
+        <div class="header-top-info">
+            <div class="header-info-item"><strong>Редакция:</strong> San-Fierro News</div>
+            <div class="header-info-item"><strong>Генеральный директор:</strong> Jonny Wilde</div>
+            <div class="header-info-item"><strong>Программный директор:</strong> Purosangue Sao</div>
+            <div class="header-info-item"><strong>Штат:</strong> San-Andreas</div>
+            <div class="header-info-item"><strong>Дата:</strong> 9 октября 2026</div>
+        </div>
+        <div class="header-main">
+            <div class="header-eyebrow">Специальное расследование • Эксклюзив</div>
+            <h1 class="header-title">МИНИСТР ФИНАНСОВ<br><span class="accent">KIR QUWWAT</span></h1>
+            <p class="header-subtitle">
+                Расследование инициировано Генеральным Директором San-Fierro News Jonny Wilde 
+                при поддержке вице-губернатора штата San-Andreas Nikos Quarless 
+                после получения информации о несоответствии между официальными доходами 
+                министра финансов и его реальным имуществом
+            </p>
+        </div>
+        <div class="header-meta">
+            <div class="header-meta-item">
+                <div class="header-meta-label">Инициатор</div>
+                <div class="header-meta-value">Jonny Wilde</div>
+            </div>
+            <div class="header-meta-item">
+                <div class="header-meta-label">Поддержка</div>
+                <div class="header-meta-value">Nikos Quarless</div>
+            </div>
+            <div class="header-meta-item">
+                <div class="header-meta-label">Объект</div>
+                <div class="header-meta-value">Kir Quwwat</div>
+            </div>
+            <div class="header-meta-item">
+                <div class="header-meta-label">Статус</div>
+                <div class="header-meta-value" style="color: var(--gold);">Завершено</div>
+            </div>
+            <div class="header-meta-item">
+                <div class="header-meta-label">Активы</div>
+                <div class="header-meta-value">$852M+</div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main-content">
+
+    <div class="hero-stats">
+        <div class="hero-stat reveal">
+            <span class="hero-stat-value" data-count="852">$0</span>
+            <span class="hero-stat-label">Миллионов активов</span>
+        </div>
+        <div class="hero-stat reveal">
+            <span class="hero-stat-value" data-count="9">0</span>
+            <span class="hero-stat-label">Доказательств собрано</span>
+        </div>
+        <div class="hero-stat reveal">
+            <span class="hero-stat-value" data-count="280">$0</span>
+            <span class="hero-stat-label">Миллионов на счету</span>
+        </div>
+        <div class="hero-stat reveal">
+            <span class="hero-stat-value" data-count="15">$0</span>
+            <span class="hero-stat-label">Миллионов за аксессуар</span>
+        </div>
+    </div>
+
+    <!-- 01: DIALOGUE START WITH PHOTOS BELOW -->
+    <section class="section" id="dialogue-start">
+        <div class="section-header reveal">
+            <div class="section-number">01</div>
+            <h2 class="section-title">Встреча в кабинете</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="dialogue-block reveal">
+            <div class="dialogue-header">
+                <h3>Утро в редакции — Официальное поручение</h3>
+                <p>01 октября 2026 • Редакция San-Fierro News • Штат San-Andreas</p>
+                <div class="dialogue-meta">
+                    <div class="dialogue-meta-item"><strong>Участники:</strong> Jonny Wilde, Purosangue Sao</div>
+                    <div class="dialogue-meta-item"><strong>Тема:</strong> Инициация расследования</div>
+                    <div class="dialogue-meta-item"><strong>Статус:</strong> <span style="color: var(--gold);">Одобрено</span></div>
+                </div>
+            </div>
+            
+            <!-- DIALOGUE TEXT FIRST -->
+            <div class="dialogue-messages">
+                
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">Пьюрсан, зайди ко мне в кабинет.
+Есть разговор, и он не для чужих ушей.
+Присаживайся, дверь прикрой плотнее.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message">
+                    <div class="dialogue-avatar purosangue">P</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name purosangue">Purosangue Sao • Программный директор</div>
+                        <div class="dialogue-text">Шеф, что-то случилось?
+Ты выглядишь напряжённым с утра.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">Ко мне пришёл бывший сотрудник мэрии.
+Он говорит вещи, от которых стынет кровь.
+Министр финансов живёт не по средствам.
+Kir Quwwat. Слышал о таком?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message">
+                    <div class="dialogue-avatar purosangue">P</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name purosangue">Purosangue Sao • Программный директор</div>
+                        <div class="dialogue-text">Министр финансов? Это серьёзно.
+Что именно он рассказал тебе?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">BMW без номеров в Родео Драйв.
+Лавка в Лас-Вентурасе с ценами до $15 лямов.
+Источник готов сотрудничать с нами.
+Но нужны доказательства, а не слухи.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message">
+                    <div class="dialogue-avatar purosangue">P</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name purosangue">Purosangue Sao • Программный директор</div>
+                        <div class="dialogue-text">Пьюрсан, я хочу поручить это тебе.
+Ты лучший в полевой работе.
+Возьмёшься за это дело?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">Шеф, я готов. Дай мне добро.
+Соберу всё: фото, документы, свидетелей.
+Поеду в риелторское агентство, в банк, на рынок.
+Где нужно — везде достану правду.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message">
+                    <div class="dialogue-avatar purosangue">P</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name purosangue">Purosangue Sao • Программный директор</div>
+                        <div class="dialogue-text">Хорошо. Даю официальное разрешение.
+Начинай расследование с этого дня.
+Действуй осторожно, Quwwat может быть опасен.
+У него могут быть связи на самом верху.
+Держи меня в курсе каждого шага.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">Принято, шеф. Начинаю прямо сегодня.
+Kir Quwwat, мы идём за тобой.
+Это дело станет нашим главным материалом.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message">
+                    <div class="dialogue-avatar purosangue">P</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name purosangue">Purosangue Sao • Программный директор</div>
+                        <div class="dialogue-text">Удачи, Пьюрсан. Я на тебя рассчитываю.
+Если что-то пойдёт не так — сразу ко мне.
+Вице-губернатор Quarless может помочь.
+Но пока работаем тихо. Никакой огласки.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">Понял, шеф. Работаю тихо.
+Отчёт будет на твоём столе через неделю.
+<em>Выходит из кабинета, закрывая дверь.</em></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PHOTO GALLERY BELOW DIALOGUE -->
+            <div class="dialogue-gallery">
+                <div class="dialogue-gallery-header">
+                    <h4>Фотоматериалы встречи</h4>
+                    <p>01 октября 2026 • Кабинет Jonny Wilde • San-Fierro News</p>
+                </div>
+                <div class="dialogue-photos-grid">
+                    <div class="dialogue-photo-card">
+                        <img src="img/22.jpg" alt="Jonny Wilde">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker jonny">Jonny Wilde</div>
+                            <div class="dialogue-photo-text">«Пьюрсан, зайди ко мне в кабинет. Есть разговор, и он не для чужих ушей.»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/16.jpg" alt="Purosangue Sao">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker purosangue">Purosangue Sao</div>
+                            <div class="dialogue-photo-text">«Шеф, что-то случилось? Ты выглядишь напряжённым с утра.»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/23.jpg" alt="Jonny Wilde">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker jonny">Jonny Wilde</div>
+                            <div class="dialogue-photo-text">«Ко мне пришёл бывший сотрудник мэрии. Министр финансов живёт не по средствам. Kir Quwwat.»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/17.jpg" alt="Purosangue Sao">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker purosangue">Purosangue Sao</div>
+                            <div class="dialogue-photo-text">«Министр финансов? Это серьёзно. Что именно он рассказал тебе?»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/24.jpg" alt="Jonny Wilde">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker jonny">Jonny Wilde</div>
+                            <div class="dialogue-photo-text">«BMW без номеров в Родео Драйв. Лавка в Лас-Вентурасе с ценами до $15 лямов.»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/18.jpg" alt="Purosangue Sao">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker purosangue">Purosangue Sao</div>
+                            <div class="dialogue-photo-text">«Принято, шеф. Начинаю прямо сегодня. Kir Quwwat, мы идём за тобой.»</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 02: DOSSIER -->
+    <section class="section" id="dossier">
+        <div class="section-header reveal">
+            <div class="section-number">02</div>
+            <h2 class="section-title">Личное дело</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="dossier reveal">
+            <div class="dossier-grid">
+                <div class="dossier-photo">
+                    <img src="img/1.jpg" alt="Kir Quwwat">
+                    <div class="dossier-photo-overlay"></div>
+                    <div class="dossier-stamp">СЕКРЕТНО</div>
+                </div>
+                <div class="dossier-info">
+                    <h3>Kir Quwwat</h3>
+                    <span class="dossier-role">Министр финансов штата San-Andreas</span>
+                    <table class="dossier-table">
+                        <tr><td>Полное имя</td><td>Kir Quwwat</td></tr>
+                        <tr><td>Возраст</td><td>42 года</td></tr>
+                        <tr><td>Должность</td><td>Министр финансов</td></tr>
+                        <tr><td>Стаж в должности</td><td>3 года (с 2023 г.)</td></tr>
+                        <tr><td>Юрисдикция</td><td>San-Andreas</td></tr>
+                        <tr><td>Образование</td><td>Экономический факультет</td></tr>
+                        <tr><td>Предыдущее место работы</td><td>Финансовый консультант</td></tr>
+                        <tr><td>Семейное положение</td><td>Женат</td></tr>
+                        <tr><td>Статус</td><td><span class="status-badge red">Подозреваемый</span></td></tr>
+                        <tr><td>Источник дохода</td><td style="color: var(--accent-glow); font-weight: 600;"> ТРЕБУЕТ ПРОВЕРКИ</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03: REALTOR - ЗАЦЕПКА №1 -->
+    <section class="section" id="realtor">
+        <div class="section-header reveal">
+            <div class="section-number">03</div>
+            <h2 class="section-title">Зацепка №1 — Недвижимость</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="story-block reveal">
+            <div class="story-grid">
+                <div class="story-content">
+                    <h3>Визит в агентство недвижимости</h3>
+                    <span class="story-sub">Los-Santos • Temple Drive • 02.10.2026</span>
+                    <p>
+                        Получив наводку от бывшего сотрудника мэрии, я отправился в престижное риелторское агентство 
+                        в районе <strong>Temple Drive, Los-Santos</strong>. Агент отказывался говорить — слишком опасная тема.
+                    </p>
+                    <p>
+                        Тогда я оставил на столе конверт. <span class="gold">Достаточно толстый, чтобы агент забыл о страхе.</span> 
+                        После этого он открыл базу данных и показал мне всё.
+                    </p>
+                    <div class="story-quote">
+                        <p>«Да, у нас есть объект министра. Трёхэтажный особняк, $90 миллионов. 
+                        Выставлен на продажу неделю назад. Но это не всё — у него ещё есть недвижимость, 
+                        которую он прячет через подставные лица.»</p>
+                        <span class="quote-author">— Агент риелторского агентства (имя засекречено)</span>
+                    </div>
+                    <p>
+                        Так я получил первые документы: <strong>фото особняка, адрес, цену и данные о владельце</strong>. 
+                        Это стало отправной точкой всего расследования.
+                    </p>
+                </div>
+                <div class="story-visual">
+                    <img src="img/4.jpg" alt="Особняк Kir Quwwat">
+                    <div class="story-visual-label">Объект • $90,000,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 04: CAR LOT - ЗАЦЕПКА №2 -->
+    <section class="section" id="carlot">
+        <div class="section-header reveal">
+            <div class="section-number">04</div>
+            <h2 class="section-title">Зацепка №2 — Автомобили</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="story-block reveal">
+            <div class="story-grid reverse">
+                <div class="story-content">
+                    <h3>Скриншот с внутреннего портала</h3>
+                    <span class="story-sub">Las-Venturas • Парковка • 03.10.2026</span>
+                    <p>
+                        Бывший сотрудник авторынка Las-Venturas, уволенный месяц назад после «странного инцидента», 
+                        связался со мной через защищённый канал. Он передал <strong>скриншот объявления</strong> 
+                        с внутреннего портала площадки — два автомобиля с заоблачными ценниками 
+                        и пометкой «Владелец: K.Q.».
+                    </p>
+                    <p>
+                        Я сразу понял — инициалы совпадают. <span class="gold">Kir Quwwat.</span> 
+                        В объявлении были указаны координаты: парковка, места №7 и №9.
+                    </p>
+                    <div class="story-quote">
+                        <p>«Я не стал ждать. Сел в машину и поехал. Если министр действительно 
+                        продаёт тачки по $115 и $160 миллионов — это уже не просто коррупция, 
+                        это демонстративное неуважение к закону.»</p>
+                        <span class="quote-author">— Purosangue Sao, полевые заметки</span>
+                    </div>
+                    <p>
+                        Приехав на место, я подошёл к одному из работников площадки и тихо спросил: 
+                        <em>«Слышал, тут стоят машины министра финансов?»</em>
+                    </p>
+                    <p>
+                        Работник огляделся и ответил: <span class="gold">«Да, места №7 и №9 — его. 
+                        Porsche и Tacoma. Цены — космос. Ты лучше уходи — сюда уже второй раз за неделю 
+                        приходят с вопросами. Последний раз охрана выгнала журналиста, говорят звонок был сверху.»</span>
+                    </p>
+                    <p>
+                        Не успел я сделать несколько фото, как подошёл охранник в чёрной форме. 
+                        <span class="red">«Уходите. Съёмка запрещена.»</span> На мои вопросы почему — 
+                        только пожал плечами и отвернулся.
+                    </p>
+                    <p>
+                        Причину выгнать меня так и не удалось выяснить. Но я почти уверен — 
+                        <strong>звонок был от того, над кем идёт расследование.</strong> 
+                        Minister Kir Quwwat знал, что я иду.
+                    </p>
+                    <p>
+                        Тем не менее, я успел зафиксировать: <strong>Toyota Tacoma TRD Pro</strong> на месте №9 
+                        и <strong>Porsche 911 GT3</strong> на месте №7. Оба — с завышенными в десятки раз ценами.
+                    </p>
+                </div>
+                <div class="story-visuals-stack">
+                    <div class="story-visual">
+                        <img src="img/5.jpg" alt="Toyota Tacoma">
+                        <div class="story-visual-label">Toyota Tacoma • Место №9 • $115M</div>
+                    </div>
+                    <div class="story-visual">
+                        <img src="img/6.jpg" alt="Porsche 911 GT3">
+                        <div class="story-visual-label">Porsche 911 GT3 • Место №7 • $160M</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 05: SHOP - ЗАЦЕПКА №3 -->
+    <section class="section" id="shop">
+        <div class="section-header reveal">
+            <div class="section-number">05</div>
+            <h2 class="section-title">Зацепка №3 — Торговля</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="story-block reveal">
+            <div class="story-grid">
+                <div class="story-content">
+                    <h3>Поиск лавки Kir Quwwat</h3>
+                    <span class="story-sub">В районе новостной организации в г. Las-Venturas • 04.10.2026</span>
+                    <p>
+                        Бывший продавец из соседней лавки, потерявший бизнес из-за демпинга Kir Quwwat, 
+                        указал мне на рынок <strong>в районе новостной организации в г. Las-Venturas</strong>. 
+                        Там, среди сотен торговых точек, я нашёл лавку с вывеской <span class="gold">«LAVKA Kir Quwwat»</span>.
+                    </p>
+                    <p>
+                        Прилавки были заставлены аксессуарами. Я начал фотографировать ценники — 
+                        и не мог поверить своим глазам. <span class="red">Один аксессуар стоил до $15,000,000.</span>
+                    </p>
+                    <div class="story-quote">
+                        <p>«Министр финансов продаёт обычные аксессуары по ценам, которые в тысячи раз 
+                        превышают их реальную стоимость. Никто не покупает брелок за 15 миллионов. 
+                        Это демонстрация того, что у него есть доступ к деньгам, которых у него быть не должно.»</p>
+                        <span class="quote-author">— Purosangue Sao, полевые заметки</span>
+                    </div>
+                    <p>
+                        Я сделал фотографии лавки, прилавков и ценников. 
+                        Владелец лавки — <strong>лично министр финансов Kir Quwwat</strong>. 
+                        Это стало ещё одним доказательством того, <strong>откуда у министра берутся деньги</strong>.
+                    </p>
+                </div>
+                <div class="story-visual">
+                    <img src="img/7.jpg" alt="Лавка Kir Quwwat">
+                    <div class="story-visual-label">LAVKA Kir Quwwat • до $15M/шт</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06: TRANSPORT - ЗАЦЕПКА №4 -->
+    <section class="section" id="transport">
+        <div class="section-header reveal">
+            <div class="section-number">06</div>
+            <h2 class="section-title">Зацепка №4 — Небо и Море</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="story-block reveal">
+            <div class="story-grid reverse">
+                <div class="story-content">
+                    <h3>Поиск крупных активов</h3>
+                    <span class="story-sub">Штат San-Andreas • 05.10.2026</span>
+                    <p>
+                        К этому моменту у меня уже было достаточно улик, но я понимал: нужны <strong>крупные активы</strong>. 
+                        Человек с такими деньгами не мог не владеть чем-то серьёзным — вертолётом, яхтой, чем-то, 
+                        что нельзя спрятать в кармане.
+                    </p>
+                    <p>
+                        Я начал с <span class="gold">публичных реестров</span>. В авиационном регистре штата San-Andreas 
+                        я нашёл компанию <strong>«SL-Aero LLC»</strong> — зарегистрированный владелец лёгкого вертолёта. 
+                        Пробив учредителей через открытые базы, я обнаружил цепочку: SL-Aero → оффшор на Кайманах → 
+                        номинальный директор, который оказался <strong>тёзкой жены Kir Quwwat</strong>.
+                    </p>
+                    <div class="story-quote">
+                        <p>«Вертолёт Maverick базировался на частной площадке за городом. 
+                        Я приехал туда на рассвете, сделал фото с безопасного расстояния. 
+                        На борту — инициалы K.Q. Стоимость: $17,000,000.»</p>
+                        <span class="quote-author">— Purosangue Sao, полевые заметки</span>
+                    </div>
+                    <p>
+                        С морским транспортом было сложнее. Морской регистр портов штата показал судно, 
+                        зарегистрированное на <strong>оффшорную компанию «Oceanic Holdings Ltd.»</strong> 
+                        Британские Виргинские острова. Тот же номинальный директор, что и у вертолёта.
+                    </p>
+                    <p>
+                        Я выехал в марину на побережье. Яхта стояла в <strong>закрытой зоне</strong>, 
+                        охраняемой частной фирмой. Мне удалось сделать несколько снимков с общественного пляжа. 
+                        Стоимость судна — <strong>~$10,000,000</strong>.
+                    </p>
+                    <p>
+                        Два объекта, <span class="gold">более $27 миллионов</span>, спрятанные за цепочкой оффшоров. 
+                        Но цепочка вела к одному человеку — <strong class="red">Kir Quwwat</strong>.
+                    </p>
+                </div>
+                <div class="story-visuals-stack">
+                    <div class="story-visual">
+                        <img src="img/9.jpg" alt="Вертолёт Maverick">
+                        <div class="story-visual-label">Maverick • $17,000,000</div>
+                    </div>
+                    <div class="story-visual">
+                        <img src="img/10.jpg" alt="Яхта Kir Quwwat">
+                        <div class="story-visual-label">Яхта • ~$10,000,000 • Закрытая марина</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 07: INFORMANT MAISON -->
+    <section class="section" id="informant">
+        <div class="section-header reveal">
+            <div class="section-number">07</div>
+            <h2 class="section-title">Юрист</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="informant-block reveal">
+            <div class="informant-info">
+                <h3>Maison Doflamingo</h3>
+                <span class="informant-sub">Юрист • Конфиденциальный информатор</span>
+                <p>Для получения доступа к закрытым собраниям работников мэрии, Purosangue Sao заключил соглашение с опытным юристом <strong style="color: var(--green-glow);">Maison Doflamingo</strong>. Благодаря его связям и профессионализму, редакция получила доступ к конфиденциальной информации о внутренних процессах в правительстве штата.</p>
+                
+                <div class="informant-quote">
+                    <p>«На каждом закрытом собрании министр финансов Kir Quwwat настаивал на сокращении бюджетов для социальных программ, образования и здравоохранения. При этом он сам приобретал активы на сотни миллионов долларов. Это вопиющее злоупотребление властью.»</p>
+                    <span class="quote-author">— Maison Doflamingo, юрист</span>
+                </div>
+
+                <p>Согласно полученным данным, министр систематически лоббировал урезание финансирования ключевых государственных программ, что напрямую повлияло на зарплаты рядовых сотрудников, включая программных директоров.</p>
+            </div>
+            <div class="informant-photo">
+                <img src="img/13.jpg" alt="Maison Doflamingo">
+                <div class="informant-photo-label">Maison Doflamingo • Юрист</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 08: VICE-GOVERNOR -->
+    <section class="section" id="vice-gov">
+        <div class="section-header reveal">
+            <div class="section-number">08</div>
+            <h2 class="section-title">Разрешение вице-губернатора</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="vg-block reveal">
+            <div class="vg-header">
+                <div class="vg-label">
+                    <div class="vg-label-dot"></div>
+                    Официальное разрешение
+                </div>
+                <h3>Зелёный свет от вице-губернатора</h3>
+                <p>Секретное расследование получило официальное одобрение на высшем уровне</p>
+            </div>
+            <div class="vg-gallery">
+                <div class="vg-photo">
+                    <img src="img/14.jpg" alt="Встреча за столами">
+                    <div class="vg-photo-caption">Рабочая встреча • Конфиденциально</div>
+                </div>
+                <div class="vg-photo">
+                    <img src="img/15.jpg" alt="Рукопожатие">
+                    <div class="vg-photo-caption">Соглашение достигнуто</div>
+                </div>
+            </div>
+            <div class="vg-text">
+                <p>
+                    Юрист <strong>Maison Doflamingo</strong>, действуя в интересах редакции San-Fierro News, 
+                    провёл серию конфиденциальных встреч с <strong>вице-губернатором штата San-Andreas Nikos Quarless</strong>. 
+                    В ходе переговоров были представлены предварительные результаты расследования, 
+                    включая данные о банковских счетах министра финансов и его подозрительных финансовых операциях.
+                </p>
+                <p>
+                    Вице-губернатор <strong>Nikos Quarless</strong>, ознакомившись с материалами, <strong class="green">лично дал добро на проведение 
+                    секретного расследования</strong> в отношении министра финансов Kir Quwwat. 
+                    По его словам, «коррупция на высшем уровне не должна оставаться безнаказанной, 
+                    и народ штата заслуживает правды».
+                </p>
+                <p>
+                    Официальное разрешение позволило редакции получить доступ к закрытым заседаниям мэрии, 
+                    внутренним документам финансового департамента и показаниям свидетелей из числа 
+                    государственных служащих. Это стало поворотным моментом в расследовании.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 09: BANK VISIT -->
+    <section class="section" id="bank-visit">
+        <div class="section-header reveal">
+            <div class="section-number">09</div>
+            <h2 class="section-title">Визит в банк</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="bank-visit-block reveal">
+            <div class="bank-visit-content">
+                <div class="bank-visit-info">
+                    <h3>Получение банковских данных</h3>
+                    <span class="bank-visit-sub">San-Andreas National Bank • 06.10.2026</span>
+                    <p>
+                        Просто так персональные данные клиента банк не выдаёт — это незаконно. 
+                        Мне потребовался <span class="gold">официальный документ от вице-губернатора Nikos Quarless</span>, 
+                        который передал юрист Maison Doflamingo после их встречи.
+                    </p>
+                    <p>
+                        С этим документом я пришёл в центральный офис банка в San-Fierro. 
+                        Менеджер долго колебался, изучал печать, сверял номер, но после предъявления бумаги 
+                        <strong>открыл доступ к реестру</strong>.
+                    </p>
+
+                    <div class="official-document">
+                        <div class="doc-header">
+                            <div class="doc-seal">⚖</div>
+                            <div class="doc-title">Официальный запрос</div>
+                            <div class="doc-subtitle">Офис вице-губернатора штата San-Andreas</div>
+                        </div>
+                        <div class="doc-body">
+                            Настоящим уполномочиваю представителя редакции <strong>San-Fierro News</strong> 
+                            Purosangue Sao получить доступ к финансовому реестру гражданина 
+                            <strong>Kir Quwwat</strong> в рамках секретного расследования №SFN-2026-0342, 
+                            санкционированного офисом вице-губернатора.
+                        </div>
+                        <div class="doc-footer">
+                            <div>
+                                <div class="doc-signature">N. Quarless</div>
+                                <div class="doc-signature-label">Вице-губернатор штата San-Andreas</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="doc-stamp">АКТИВЕН</div>
+                                <div class="doc-signature-label" style="margin-top: 8px;">REF: VG-2026-10-06</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bank-visit-details">
+                        <div class="bank-visit-detail">
+                            <div class="bank-visit-detail-label">Дата визита</div>
+                            <div class="bank-visit-detail-value">06.10.2026</div>
+                        </div>
+                        <div class="bank-visit-detail">
+                            <div class="bank-visit-detail-label">Отделение</div>
+                            <div class="bank-visit-detail-value">Центральный офис San-Fierro</div>
+                        </div>
+                        <div class="bank-visit-detail">
+                            <div class="bank-visit-detail-label">Основание</div>
+                            <div class="bank-visit-detail-value">Документ VG-2026-10-06</div>
+                        </div>
+                        <div class="bank-visit-detail">
+                            <div class="bank-visit-detail-label">Результат</div>
+                            <div class="bank-visit-detail-value" style="color: var(--accent-glow);">$280,000,000</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bank-visit-gallery">
+                    <div class="bank-visit-photo-wrapper">
+                        <div class="bank-visit-photo">
+                            <img src="img/11.jpg" alt="Purosangue Sao у кассы банка">
+                        </div>
+                        <div class="bank-visit-caption">
+                            «Хотел бы запросить реестр»
+                            <span class="speaker">— Purosangue Sao</span>
+                        </div>
+                    </div>
+                    <div class="bank-visit-photo-wrapper">
+                        <div class="bank-visit-photo">
+                            <img src="img/12.jpg" alt="Purosangue Sao разговаривает с менеджером банка">
+                        </div>
+                        <div class="bank-visit-caption">
+                            «А что насчёт Kir Quwwat?»
+                            <span class="speaker">— Purosangue Sao</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10: BANK DATA -->
+    <section class="section" id="bank">
+        <div class="section-header reveal">
+            <div class="section-number">10</div>
+            <h2 class="section-title">Банковские данные</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="bank-section reveal">
+            <div class="bank-card-3d">
+                <div class="bank-card-inner" id="bankCard">
+                    <div class="card-top">
+                        <div class="card-top-row">
+                            <div class="card-bank-name">SAN-ANDREAS NATIONAL BANK</div>
+                            <div class="card-bank-type">PLATINUM</div>
+                        </div>
+                        <div class="card-chip"></div>
+                    </div>
+                    <div class="card-middle">
+                        <div class="card-number">•••• •••• •••• 7342</div>
+                        <div class="card-balance-row">
+                            <span class="card-balance-label">Баланс счёта</span>
+                            <span class="card-balance-value">$280,000,000.00</span>
+                        </div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="card-bottom-left">
+                            <div class="card-field">
+                                <div class="card-field-label">Владелец карты</div>
+                                <div class="card-field-value">Kir Quwwat</div>
+                            </div>
+                            <div class="card-field">
+                                <div class="card-field-label">Действует до</div>
+                                <div class="card-field-value">12/29</div>
+                            </div>
+                        </div>
+                        <div class="card-logo">VISA</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bank-info">
+                <div class="bank-info-title">Информация о счёте</div>
+                <div class="bank-info-row">
+                    <span class="bank-info-label">Владелец</span>
+                    <span class="bank-info-value">Kir Quwwat</span>
+                </div>
+                <div class="bank-info-row">
+                    <span class="bank-info-label">Должность</span>
+                    <span class="bank-info-value">Министр финансов</span>
+                </div>
+                <div class="bank-info-row">
+                    <span class="bank-info-label">Штат</span>
+                    <span class="bank-info-value">San-Andreas</span>
+                </div>
+                <div class="bank-info-row">
+                    <span class="bank-info-label">Тип карты</span>
+                    <span class="bank-info-value">Platinum Visa</span>
+                </div>
+                <div class="bank-info-row">
+                    <span class="bank-info-label">Дата открытия</span>
+                    <span class="bank-info-value">2024</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11: BMW -->
+    <section class="section" id="bmw">
+        <div class="section-header reveal">
+            <div class="section-number">11</div>
+            <h2 class="section-title">BMW без номеров</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="bmw-section reveal">
+            <div class="bmw-header">
+                <div class="bmw-alert-label">
+                    <div class="nav-status-dot"></div>
+                    Нарушение законодательства
+                </div>
+                <h2>BMW <span>БЕЗ НОМЕРОВ</span></h2>
+                <p>Ежедневный транспорт министра финансов Kir Quwwat</p>
+            </div>
+            <div class="bmw-photos">
+                <div class="bmw-photo">
+                    <img src="img/2.jpg" alt="BMW Kir Quwwat — вид сзади">
+                    <div class="bmw-photo-caption">Фото 1 • Rodeo Drive, Los-Santos</div>
+                </div>
+                <div class="bmw-photo">
+                    <img src="img/3.jpg" alt="BMW Kir Quwwat — вид спереди">
+                    <div class="bmw-photo-caption">Фото 2 • Rodeo Drive, Los-Santos</div>
+                </div>
+            </div>
+            <p class="bmw-text">
+                Министр финансов Kir Quwwat ежедневно передвигается на автомобиле <strong>BMW белого цвета</strong> без государственных регистрационных номеров. Автомобиль был зафиксирован в районе Rodeo Drive, Los-Santos. Отсутствие номерных знаков на транспортном средстве высокопоставленного чиновника, отвечающего за финансы штата San-Andreas, является <strong>прямым нарушением законодательства</strong> и вызывает серьёзные подозрения в попытке скрыть перемещения от правоохранительных органов.
+            </p>
+        </div>
+    </section>
+
+    <!-- 12: ACCUSATIONS -->
+    <section class="section" id="accusations">
+        <div class="section-header reveal">
+            <div class="section-number">12</div>
+            <h2 class="section-title">Вопросы к министру</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="accusations reveal">
+            <div class="accusations-header">
+                <h2>Девять вопросов, на которые нет ответа</h2>
+                <p>Совокупная стоимость имущества Kir Quwwat превышает $852,000,000</p>
+            </div>
+            <div class="accusation-item">
+                <div class="accusation-num">1</div>
+                <div class="accusation-text">Откуда у министра финансов Kir Quwwat, чья официальная зарплата составляет десятки тысяч долларов в год, имущество на <strong>$850+ миллионов</strong>?</div>
+            </div>
+            <div class="accusation-item">
+                <div class="accusation-num">2</div>
+                <div class="accusation-text">Не являются ли средства на банковском счёте (<strong>$280,000,000</strong>) деньгами, похищенными из казны штата San-Andreas?</div>
+            </div>
+            <div class="accusation-item">
+                <div class="accusation-num">3</div>
+                <div class="accusation-text">Почему министр продаёт автомобили по ценам, в десятки раз превышающим рыночную стоимость? Не является ли это схемой <strong>отмывания денег</strong>?</div>
+            </div>
+            <div class="accusation-item">
+                <div class="accusation-num">4</div>
+                <div class="accusation-text">Зачем министру финансов яхта, вертолёт и два автомобиля класса люкс, если его работа — сидеть в кабинете?</div>
+            </div>
+            <div class="accusation-item">
+                <div class="accusation-num">5</div>
+                <div class="accusation-text">Почему Kir Quwwat ездит на BMW без номеров? <strong>Что он скрывает</strong> от правоохранительных органов штата San-Andreas?</div>
+            </div>
+            <div class="accusation-item">
+                <div class="accusation-num">6</div>
+                <div class="accusation-text">Кто является реальным покупателем мотоцикла за <strong>$35,000,000</strong>? Не связана ли эта сделка с коррупционной схемой?</div>
+            </div>
+            <div class="accusation-item">
+                <div class="accusation-num">7</div>
+                <div class="accusation-text">Почему на личной лавке министра в Las-Venturas аксессуары стоят до <strong>$15,000,000</strong> за штуку? Откуда у него такие товары?</div>
+            </div>
+            <div class="accusation-item">
+                <div class="accusation-num">8</div>
+                <div class="accusation-text">Почему на закрытых собраниях мэрии министр постоянно требовал <strong>урезать бюджеты</strong> социальных программ, при этом приобретая личные активы?</div>
+            </div>
+            <div class="accusation-item">
+                <div class="accusation-num">9</div>
+                <div class="accusation-text">Почему министр отказывается проходить добровольную аудиторскую проверку своих финансовых операций?</div>
+            </div>
+            <div class="accusation-cta">
+                <p>Редакция San-Fierro News настаивает на немедленном начале официального расследования</p>
+                <button class="cta-button" onclick="openModal()">Требовать проверку</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13: STATEMENT -->
+    <section class="statement-section" id="statement">
+        <div class="section-header reveal">
+            <div class="section-number">13</div>
+            <h2 class="section-title">Официальное заявление</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="statement-block reveal">
+            <div class="statement-quote-mark">"</div>
+            <div class="statement-label">
+                <div class="statement-label-dot"></div>
+                От редакции San-Fierro News
+            </div>
+            <div class="statement-content">
+                <p class="statement-text">
+                    Недавно наша редакция запросила реестр средних зарплат в государственных организациях штата. 
+                    И знаете, что мы обнаружили? Программный директор получает зарплату на уровне 
+                    <span class="red-bg">охранника в мэрии</span>.
+                    <br><br>
+                    Уважаемый министр финансов Kir Quwwat, объясните народу штата San-Andreas: 
+                    <span class="highlight">куда уходят деньги</span>, которые по закону должны идти на зарплаты 
+                    государственных служащих? Почему человек, отвечающий за казну, владеет активами на 
+                    <span class="highlight nowrap">$852 миллиона</span>, а рядовые сотрудники получают копейки?
+                </p>
+                <div class="statement-author">
+                    <div class="statement-author-avatar">SFN</div>
+                    <div class="statement-author-info">
+                        <div class="statement-author-name">Редакция San-Fierro News</div>
+                        <div class="statement-author-role">Официальное заявление</div>
+                        <div class="statement-author-org">Штат San-Andreas</div>
+                    </div>
+                    <div class="statement-author-date">
+                        <strong>09.10.2026</strong>
+                        Официальное обращение
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14: THANKS -->
+    <section class="section" id="thanks">
+        <div class="section-header reveal">
+            <div class="section-number">14</div>
+            <h2 class="section-title">Слова благодарности</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="thanks-block reveal">
+            <div class="thanks-quote-mark">"</div>
+            <div class="thanks-label">
+                <div class="thanks-label-dot"></div>
+                От редакции San-Fierro News
+            </div>
+            <div class="thanks-content">
+                <p class="thanks-text">
+                    Это расследование стало возможным благодаря неравнодушным людям, которые не побоялись 
+                    выступить против системы. Мы, <span class="highlight">редакция San-Fierro News</span>, хотим выразить 
+                    глубокую признательность каждому, кто оказал содействие в сборе информации, предоставлении 
+                    документов и моральной поддержке на протяжении всего процесса.
+                </p>
+                <p class="thanks-text">
+                    Отдельная благодарность <span class="highlight-green">Maison Doflamingo</span> — без его 
+                    профессионализма и связей это дело так и осталось бы в тени. Спасибо 
+                    <span class="highlight">вице-губернатору Nikos Quarless</span> за смелость дать зелёный свет 
+                    секретному расследованию и за понимание того, что правда важнее политических игр.
+                </p>
+                <p class="thanks-text">
+                    Спасибо сотрудникам банка, которые не побоялись предоставить данные. Спасибо бывшему сотруднику мэрии, 
+                    бывшему работнику авторынка и бывшему продавцу с рынка — тем, кто рискнул всем ради справедливости. 
+                    И спасибо каждому жителю штата San-Andreas, кто верит, что коррупция должна быть наказана.
+                </p>
+                <div class="thanks-names">
+                    <div class="thanks-name-chip">Maison Doflamingo</div>
+                    <div class="thanks-name-chip">Nikos Quarless</div>
+                    <div class="thanks-name-chip">San-Andreas National Bank</div>
+                    <div class="thanks-name-chip">Бывший сотрудник мэрии</div>
+                    <div class="thanks-name-chip">Бывший работник авторынка</div>
+                    <div class="thanks-name-chip">Бывший продавец с рынка</div>
+                    <div class="thanks-name-chip">Редакция San-Fierro News</div>
+                    <div class="thanks-name-chip">Жители штата</div>
+                </div>
+                <div class="thanks-author">
+                    <div class="thanks-author-avatar">SFN</div>
+                    <div class="thanks-author-info">
+                        <div class="thanks-author-name">Редакция San-Fierro News</div>
+                        <div class="thanks-author-role">Официальное обращение</div>
+                        <div class="thanks-author-org">Штат San-Andreas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15: REPORT TO JONNY WITH PHOTOS BELOW -->
+    <section class="section" id="report">
+        <div class="section-header reveal">
+            <div class="section-number">15</div>
+            <h2 class="section-title">Отчёт Генеральному директору</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="report-block reveal">
+            <div class="report-header">
+                <div class="report-badge">
+                    <div class="statement-label-dot"></div>
+                    Финальный документ
+                </div>
+                <h2>ОТЧЁТ ПО РЕЗУЛЬТАТАМ РАССЛЕДОВАНИЯ</h2>
+                <p>Дело министра финансов Kir Quwwat • Штат San-Andreas</p>
+                <div class="report-meta">
+                    <div class="report-meta-item">
+                        <div class="report-meta-label">Номер дела</div>
+                        <div class="report-meta-value">SFN-2026-0342</div>
+                    </div>
+                    <div class="report-meta-item">
+                        <div class="report-meta-label">Статус</div>
+                        <div class="report-meta-value" style="color: var(--gold);">Завершено</div>
+                    </div>
+                    <div class="report-meta-item">
+                        <div class="report-meta-label">Срок</div>
+                        <div class="report-meta-value">01.10 — 09.10.2026</div>
+                    </div>
+                    <div class="report-meta-item">
+                        <div class="report-meta-label">Инициатор</div>
+                        <div class="report-meta-value">Jonny Wilde</div>
+                    </div>
+                    <div class="report-meta-item">
+                        <div class="report-meta-label">Поддержка</div>
+                        <div class="report-meta-value">Nikos Quarless</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-findings">
+                <div class="report-finding">
+                    <div class="report-finding-icon red"></div>
+                    <div class="report-finding-text">
+                        <h5>Несоответствие доходов и активов</h5>
+                        <p>Совокупная стоимость выявленных активов министра финансов Kir Quwwat составляет более $852,000,000, что многократно превышает его официальные доходы.</p>
+                    </div>
+                </div>
+                <div class="report-finding">
+                    <div class="report-finding-icon red">🏦</div>
+                    <div class="report-finding-text">
+                        <h5>Подозрительные банковские операции</h5>
+                        <p>На банковском счёте Kir Quwwat зафиксирован баланс $280,000,000. Источник происхождения средств не установлен.</p>
+                    </div>
+                </div>
+                <div class="report-finding">
+                    <div class="report-finding-icon red"></div>
+                    <div class="report-finding-text">
+                        <h5>Нарушение транспортного законодательства</h5>
+                        <p>Министр ежедневно использует BMW без государственных регистрационных номеров.</p>
+                    </div>
+                </div>
+                <div class="report-finding">
+                    <div class="report-finding-icon gold"></div>
+                    <div class="report-finding-text">
+                        <h5>Подозрительная коммерческая деятельность</h5>
+                        <p>Лавка министра в Las-Venturas реализует аксессуары по ценам до $15,000,000 за единицу.</p>
+                    </div>
+                </div>
+                <div class="report-finding">
+                    <div class="report-finding-icon green">✓</div>
+                    <div class="report-finding-text">
+                        <h5>Официальное разрешение получено</h5>
+                        <p>Вице-губернатор Nikos Quarless лично дал добро на проведение секретного расследования.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FINAL DIALOGUE WITH PHOTOS BELOW -->
+            <div class="dialogue-header" style="margin-top: 40px;">
+                <h3>Встреча в кабинете — Финальный доклад</h3>
+                <p>09 октября 2026 • Кабинет Jonny Wilde</p>
+            </div>
+            
+            <!-- DIALOGUE TEXT FIRST -->
+            <div class="dialogue-messages">
+                
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">Пьюрсан, зайди ко мне в кабинет.
+Разговор серьёзный, дверь закрой.
+Ты уже читал мой финальный отчёт?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message">
+                    <div class="dialogue-avatar purosangue">P</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name purosangue">Purosangue Sao</div>
+                        <div class="dialogue-text">Да, шеф. Всё подтвердилось.
+У Kir Quwwat активов на $852 миллиона.
+Счёт в банке — $280 миллионов.
+Яхта, вертолёт, тачки, лавка.
+Особняк за $90 лямов в Лос-Сантосе.
+И это ещё не всё, что мы нашли.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">Чёрт возьми, Пьюрсан.
+Ты проделал огромную работу.
+Вице-губернатор нас прикрыл?
+Без его бумаги банк бы молчал.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message">
+                    <div class="dialogue-avatar purosangue">P</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name purosangue">Purosangue Sao</div>
+                        <div class="dialogue-text">Да, шеф. Всё официально.
+Документ от Quarless на руках.
+Прокуратура уже в курсе.
+Дело зарегистрировано под номером.
+SFN-2026-0342, если точно.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">Значит так, слушай сюда.
+Готовь полный пакет документов.
+Фотографии, выписки, показания.
+Всё, что собрал — в одну папку.
+Сегодня же передаём в прокуратуру.
+Лично губернатору копию вручим.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message">
+                    <div class="dialogue-avatar purosangue">P</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name purosangue">Purosangue Sao</div>
+                        <div class="dialogue-text">Принято, шеф. Папка готова.
+Передаю в надзорные органы сегодня.
+Пусть закон решает его судьбу.
+<strong class="red">Kir Quwwat, твоё время вышло.</strong></div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Генеральный директор</div>
+                        <div class="dialogue-text">Я горжусь тобой, Пьюрсан.
+Ты рисковал, но довёл до конца.
+Народ штата должен знать правду.
+Quwwat ответит за каждую копейку.</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message">
+                    <div class="dialogue-avatar jonny">J</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name jonny">Jonny Wilde • Дополнительные вопросы</div>
+                        <div class="dialogue-text">Ты уверен в источнике из мэрии?
+Свидетель готов дать показания в суде?
+Юрист подтвердил легальность бумаг?</div>
+                    </div>
+                </div>
+
+                <div class="dialogue-message right">
+                    <div class="dialogue-avatar purosangue">P</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-name purosangue">Purosangue Sao • Ответы</div>
+                        <div class="dialogue-text">Источник надёжный, я его знаю.
+Свидетель готов, но боится мести.
+Doflamingo всё проверил лично.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PHOTO GALLERY BELOW DIALOGUE -->
+            <div class="dialogue-gallery">
+                <div class="dialogue-gallery-header">
+                    <h4>Фотоматериалы финальной встречи</h4>
+                    <p>09 октября 2026 • Кабинет Jonny Wilde • San-Fierro News</p>
+                </div>
+                <div class="dialogue-photos-grid">
+                    <div class="dialogue-photo-card">
+                        <img src="img/21.jpg" alt="Purosangue Sao">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker purosangue">Purosangue Sao</div>
+                            <div class="dialogue-photo-text">«Да, шеф. Всё подтвердилось. У Kir Quwwat активов на $852 миллиона.»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/25.jpg" alt="Jonny Wilde">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker jonny">Jonny Wilde</div>
+                            <div class="dialogue-photo-text">«Готовь полный пакет документов. Сегодня же передаём в прокуратуру.»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/20.jpg" alt="Purosangue Sao">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker purosangue">Purosangue Sao</div>
+                            <div class="dialogue-photo-text">«Да, шеф. Всё официально. Документ от Quarless на руках.»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/26.jpg" alt="Jonny Wilde">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker jonny">Jonny Wilde</div>
+                            <div class="dialogue-photo-text">«Я горжусь тобой, Пьюрсан. Ты рисковал, но довёл до конца.»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/19.jpg" alt="Purosangue Sao">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker purosangue">Purosangue Sao</div>
+                            <div class="dialogue-photo-text">«Принято, шеф. Папка готова. Kir Quwwat, твоё время вышло.»</div>
+                        </div>
+                    </div>
+                    <div class="dialogue-photo-card">
+                        <img src="img/26.jpg" alt="Jonny Wilde">
+                        <div class="dialogue-photo-info">
+                            <div class="dialogue-photo-speaker jonny">Jonny Wilde</div>
+                            <div class="dialogue-photo-text">«Ты уверен в источнике из мэрии? Свидетель готов дать показания?»</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-footer">
+                <div class="report-footer-left">
+                    <div class="report-footer-sign">J</div>
+                    <div>
+                        <div class="report-footer-name">Jonny Wilde</div>
+                        <div class="report-footer-role">Генеральный директор • San-Fierro News</div>
+                    </div>
+                </div>
+                <div class="report-footer-right">
+                    <div class="report-footer-date">09 октября 2026 года</div>
+                    <div class="report-footer-id">REF: SFN-2026-0342-FINAL</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 16: SUMMARY -->
+    <section class="section" id="summary">
+        <div class="section-header reveal">
+            <div class="section-number">16</div>
+            <h2 class="section-title">Сводная ведомость</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="summary-table-wrap reveal">
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Актив</th>
+                        <th>Статус</th>
+                        <th>Стоимость</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>01</td><td>Трёхэтажный особняк (Los-Santos)</td><td>На продаже</td><td>$90,000,000</td></tr>
+                    <tr><td>02</td><td>Toyota Tacoma TRD Pro</td><td>На продаже</td><td>$115,000,000</td></tr>
+                    <tr><td>03</td><td>Porsche 911 GT3</td><td>На продаже</td><td>$160,000,000</td></tr>
+                    <tr><td>04</td><td>Мотоцикл</td><td>Продан</td><td>$35,000,000</td></tr>
+                    <tr><td>05</td><td>Яхта</td><td>В собственности</td><td>~$10,000,000</td></tr>
+                    <tr><td>06</td><td>Вертолёт Maverick</td><td>В собственности</td><td>$17,000,000</td></tr>
+                    <tr><td>07</td><td>Лавка на рынке</td><td>Активна</td><td>до $15,000,000/шт</td></tr>
+                    <tr class="bmw-row">
+                        <td>08</td>
+                        <td>BMW без номеров (Rodeo Drive) <span class="bmw-illegal-tag"> Незаконное владение</span></td>
+                        <td>Используется</td>
+                        <td>~$130,000,000 – $160,000,000</td>
+                    </tr>
+                    <tr><td>09</td><td>Банковский счёт</td><td>Активен</td><td>$280,000,000</td></tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">ИТОГО (с учётом BMW)</td>
+                        <td>~$852,000,000</td>
+                    </tr>
+                </tfoot>
+            </table>
+            
+            <div class="disclaimer">
+                <div class="disclaimer-icon">⚠️</div>
+                <div class="disclaimer-text">
+                    <strong>Важно:</strong> Вся представленная информация основана исключительно на сведениях, которые смог собрать программный директор Purosangue Sao в ходе журналистского расследования. 
+                    Данные могут быть неполными. Возможно, у министра финансов есть дополнительная недвижимость и активы, о которых редакции пока неизвестно. 
+                    Расследование инициировано Генеральным Директором Jonny Wilde при поддержке вице-губернатора штата San-Andreas Nikos Quarless.
+                </div>
+            </div>
+
+            <!-- FINAL STATUS BLOCK -->
+            <div class="final-status-block">
+                <div class="final-status-header">
+                    <div class="final-status-label">
+                        <div class="final-status-label-dot"></div>
+                        Передача материалов
+                    </div>
+                    <h3>Дело передано в надзорные органы</h3>
+                    <p>Редакция San-Fierro News выполнила свой журналистский долг</p>
+                </div>
+                <div class="final-status-grid">
+                    <div class="final-status-card">
+                        <div class="final-status-card-icon">⚖️</div>
+                        <div class="final-status-card-label">Куда передано</div>
+                        <div class="final-status-card-value green">Прокуратура штата</div>
+                    </div>
+                    <div class="final-status-card">
+                        <div class="final-status-card-icon">🏛️</div>
+                        <div class="final-status-card-label">Лично передано</div>
+                        <div class="final-status-card-value gold">Губернатору штата</div>
+                    </div>
+                    <div class="final-status-card">
+                        <div class="final-status-card-icon"></div>
+                        <div class="final-status-card-label">Номер дела</div>
+                        <div class="final-status-card-value">SFN-2026-0342</div>
+                    </div>
+                </div>
+                <div class="final-status-text">
+                    Редакция <strong>San-Fierro News</strong> официально передала все собранные материалы дела 
+                    в <strong>прокуратуру штата San-Andreas</strong> и лично <strong class="gold">губернатору штата</strong>. 
+                    Полный пакет документов включает фотографии, банковские выписки, показания свидетелей, 
+                    данные публичных реестров и официальные разрешения. 
+                    <br><br>
+                    Мы <strong>ожидаем дальнейшего развития событий</strong> и продолжим освещать ход официального расследования. 
+                    Народ штата San-Andreas заслуживает знать правду.
+                    <br><br>
+                    <em style="color: var(--gold);">— Редакция San-Fierro News, 9 октября 2026 года</em>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<footer class="footer">
+    <div class="footer-logo">SAN-FIERRO NEWS</div>
+    <div class="footer-text">
+        © 2026 Редакция San-Fierro News • Генеральный директор: Jonny Wilde • Программный директор: Purosangue Sao<br>
+        Все данные получены в ходе журналистского расследования<br>
+        Объект расследования: Kir Quwwat — Министр финансов штата San-Andreas<br>
+        Дело №SFN-2026-0342 • Статус: Передано в прокуратуру
+    </div>
+</footer>
+
+<div class="modal-overlay" id="modal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal()"></button>
+        <div class="modal-icon">⚖️</div>
+        <h3>Запрос отправлен</h3>
+        <p>Ваш запрос на проведение официальной аудиторской проверки министра финансов Kir Quwwat принят. Материалы дела уже переданы в прокуратуру штата San-Andreas по инициативе Jonny Wilde и при поддержке Nikos Quarless.</p>
+        <button class="modal-btn" onclick="closeModal()">Закрыть</button>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+    });
+});
+
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+        }
+    });
+});
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el);
+});
+
+const counters = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.dataset.count);
+            const isMoney = el.textContent.includes('$');
+            const prefix = isMoney ? '$' : '';
+            let current = 0;
+            const increment = target / 80;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                    el.textContent = prefix + target.toLocaleString() + (target >= 100 ? 'M+' : '');
+                } else {
+                    el.textContent = prefix + Math.floor(current).toLocaleString() + (target >= 100 ? 'M' : '');
+                }
+            }, 20);
+            counterObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+counters.forEach(c => counterObserver.observe(c));
+
+const card = document.getElementById('bankCard');
+if (card) {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 8;
+        const rotateY = (centerX - x) / 8;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0) rotateY(0)';
+    });
+}
+
+function openModal() {
+    document.getElementById('modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('modal')) {
+        closeModal();
+    }
+});
+
+document.querySelectorAll('.accusation-item').forEach(item => {
+    item.addEventListener('click', () => {
+        item.style.background = 'rgba(220,38,38,0.06)';
+        item.style.borderColor = 'rgba(220,38,38,0.3)';
+        setTimeout(() => {
+            item.style.background = '';
+            item.style.borderColor = '';
+        }, 500);
+    });
+});
+</script>
+
+</body>
+</html>
